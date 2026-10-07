@@ -27,13 +27,6 @@ public class UserApiClient {
                 .basePath(BASE_PATH);
     }
 
-    @Step("Получение access токена")
-    private String getAccessToken(ValidatableResponse loginResp) {
-        return loginResp
-                .extract()
-                .path("accessToken");
-    }
-
     @Step("Получение bearer токена")
     public String getBearerToken(ValidatableResponse loginResp) {
         return loginResp
@@ -50,12 +43,6 @@ public class UserApiClient {
                 .when()
                 .post(EnvConfig.LOGIN)
                 .then();
-    }
-
-    @Step("Проверка успешного логина пользователя")
-    public boolean isUserLoggedIn(ValidatableResponse createResp) {
-        int statusCode = createResp.extract().statusCode();
-        return statusCode == 200;
     }
 
     @Step("Удаление пользователя")
